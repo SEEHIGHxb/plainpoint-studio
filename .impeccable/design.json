@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-22T00:00:00Z",
+  "title": "Design System: Plain Point Studio",
+  "extensions": {
+    "colorMeta": {
+      "strip-good": {
+        "role": "primary",
+        "displayName": "Signal Chartreuse",
+        "canonical": "#b8e600",
+        "tonalRamp": ["#1f2900", "#3a4d00", "#557000", "#719400", "#8db800", "#b8e600", "#d3f24d", "#edfaad"]
+      },
+      "strip-note": {
+        "role": "primary",
+        "displayName": "Working Amber",
+        "canonical": "#ffa61a",
+        "tonalRamp": ["#2e1c00", "#4d3000", "#6e4500", "#915b00", "#c07800", "#ffa61a", "#ffc46b", "#ffe4b8"]
+      },
+      "strip-info": {
+        "role": "secondary",
+        "displayName": "Instrument Cyan",
+        "canonical": "#00b3d6",
+        "tonalRamp": ["#002027", "#003844", "#005265", "#006e88", "#008cab", "#00b3d6", "#5bd3ec", "#b3ecf8"]
+      },
+      "strip-hold": {
+        "role": "secondary",
+        "displayName": "Held Grey",
+        "canonical": "#9aa3a8",
+        "tonalRamp": ["#1c2023", "#31373b", "#474e53", "#5f676c", "#7a8287", "#9aa3a8", "#bfc6ca", "#e3e7e9"]
+      },
+      "liner": {
+        "role": "neutral",
+        "displayName": "Liner Grey",
+        "canonical": "#c9d1cc",
+        "tonalRamp": ["#1b201e", "#2f3633", "#454e4a", "#5d6763", "#96a09b", "#c9d1cc", "#dee3e0", "#f0f3f1"]
+      },
+      "stock": {
+        "role": "neutral",
+        "displayName": "Label Stock",
+        "canonical": "#f6f7f4",
+        "tonalRamp": ["#1e201c", "#343730", "#4b4f46", "#6a6f64", "#9ba095", "#cdd1c8", "#e6e8e2", "#f6f7f4"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Press Ink",
+        "canonical": "#15181a",
+        "tonalRamp": ["#15181a", "#252a2d", "#383f43", "#4d565b", "#6d787e", "#95a0a6", "#c2cacf", "#e8ecee"]
+      },
+      "url": {
+        "role": "neutral",
+        "displayName": "Address Blue",
+        "canonical": "#056a80",
+        "tonalRamp": ["#001a20", "#012e38", "#034a5a", "#056a80", "#0c8ba6", "#2eb2ce", "#7fd3e5", "#cceef5"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The studio name on the master label only. Uppercase, width axis at 66%." },
+      "headline": { "displayName": "Headline", "purpose": "App names on catalogue labels. Uppercase, width axis at 74%." },
+      "title": { "displayName": "Title", "purpose": "The studio tagline. The only role set at near-normal width." },
+      "body": { "displayName": "Body", "purpose": "All prose, in soft ink, capped at a 64ch measure." },
+      "label": { "displayName": "Label", "purpose": "Auxiliary strips, lot numbers, record fields, colophon. Uppercase and tracked." }
+    },
+    "shadows": [
+      {
+        "name": "label-rest",
+        "value": "0 1px 2px rgba(21,24,26,0.16), 0 12px 26px -14px rgba(21,24,26,0.5)",
+        "purpose": "A label lying flat on the liner. Tight contact shadow plus wide soft drop."
+      },
+      {
+        "name": "label-lifted",
+        "value": "0 2px 4px rgba(21,24,26,0.18), 0 26px 40px -20px rgba(21,24,26,0.62)",
+        "purpose": "Hover and focus-within on catalogue labels only, paired with translateY(-3px)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only easing in the system. Exponential ease-out, used for lift, arrow travel and the settle keyframe."
+      },
+      {
+        "name": "settle",
+        "value": "settle 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards; delays 0.04s-0.56s; from { opacity: 0; transform: translateY(14px) rotate(var(--tilt)) }",
+        "purpose": "The one authored moment: labels laid onto the sheet in sequence, each with its own slight tilt. Wrapped in prefers-reduced-motion: no-preference."
+      }
+    ],
+    "breakpoints": [
+      { "name": "master-split", "value": "900px" },
+      { "name": "catalogue-collapse", "value": "1000px" },
+      { "name": "sheet-stack", "value": "680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Label",
+      "kind": "card",
+      "refersTo": "label-card",
+      "description": "The only container in the system. Die-cut stock with a strip row pinned to its foot; the whole surface is the link target.",
+      "html": "<article class=\"ds-label\"><div class=\"ds-label__body\"><p class=\"ds-lot\"><span>Lot 01</span><span class=\"ds-lot__state\">Live</span></p><h3 class=\"ds-label__name\"><a href=\"#\">Life Balance Index</a></h3><p class=\"ds-prose\">A self-assessment dashboard for eight aspects of life.</p><p class=\"ds-go\"><span class=\"ds-go__do\">Open</span><span class=\"ds-go__host\">lbi.plainpoint.net</span></p></div><ul class=\"ds-strips\"><li class=\"ds-strip ds-strip--good\">Data stays on this device</li><li class=\"ds-strip ds-strip--good\">No account</li><li class=\"ds-strip ds-strip--info\">Open source</li></ul></article>",
+      "css": ".ds-label { position: relative; display: flex; flex-direction: column; background: #f6f7f4; color: #15181a; border-radius: 6px 20px 20px 6px; box-shadow: 0 1px 2px rgba(21,24,26,.16), 0 12px 26px -14px rgba(21,24,26,.5); overflow: hidden; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1); } .ds-label:hover, .ds-label:focus-within { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(21,24,26,.18), 0 26px 40px -20px rgba(21,24,26,.62); } .ds-label__body { flex: 1; padding: 2rem; } .ds-lot { display: flex; justify-content: space-between; margin: 0 0 1.1rem; font-size: .68rem; font-weight: 700; font-stretch: 84%; letter-spacing: .12em; text-transform: uppercase; color: #4a524e; } .ds-lot__state { display: inline-flex; align-items: center; gap: .45em; color: #15181a; } .ds-lot__state::before { content: ''; width: .6em; height: .6em; border-radius: 50%; background: #6f8c00; } .ds-label__name { margin: 0; font-size: 2.25rem; font-weight: 800; font-stretch: 74%; line-height: .98; letter-spacing: -.02em; text-transform: uppercase; } .ds-label__name a { color: inherit; text-decoration: none; } .ds-label:hover .ds-label__name a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; } .ds-label__name a::before { content: ''; position: absolute; inset: 0; } .ds-prose { margin: 1.1rem 0 0; max-width: 64ch; color: #4a524e; line-height: 1.55; } .ds-go { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .6rem; margin: 1.4rem 0 0; font-size: .78rem; font-weight: 700; font-stretch: 86%; letter-spacing: .06em; text-transform: uppercase; } .ds-go__do::after { content: ' \\2192'; display: inline-block; transition: transform .35s cubic-bezier(.16,1,.3,1); } .ds-label:hover .ds-go__do::after { transform: translateX(4px); } .ds-go__host { font-weight: 600; letter-spacing: .02em; text-transform: none; color: #056a80; overflow-wrap: anywhere; } .ds-strips { list-style: none; display: flex; flex-wrap: wrap; gap: 3px; margin: 0; padding: 3px; background: #e2e5df; } .ds-strip { flex: 1 1 auto; padding: .6em .9em; font-size: .72rem; font-weight: 700; font-stretch: 80%; letter-spacing: .07em; line-height: 1.2; text-transform: uppercase; color: #15181a; white-space: nowrap; } .ds-strip--good { background: #b8e600; } .ds-strip--info { background: #00b3d6; }"
+    },
+    {
+      "name": "Auxiliary Strip - earned",
+      "kind": "chip",
+      "refersTo": "strip-good",
+      "description": "A privacy property that genuinely holds. Never awarded for visual balance.",
+      "html": "<span class=\"ds-strip-good\">Data stays on this device</span>",
+      "css": ".ds-strip-good { display: inline-block; padding: .6em .9em; background: #b8e600; color: #15181a; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: .72rem; font-weight: 700; font-stretch: 80%; letter-spacing: .07em; line-height: 1.2; text-transform: uppercase; }"
+    },
+    {
+      "name": "Auxiliary Strip - notice",
+      "kind": "chip",
+      "refersTo": "strip-note",
+      "description": "Something the visitor must know before using the app: a server, an account, a sign-in. Amber, not red - a disclosure rather than a hazard.",
+      "html": "<span class=\"ds-strip-note\">Server component (Supabase)</span>",
+      "css": ".ds-strip-note { display: inline-block; padding: .6em .9em; background: #ffa61a; color: #15181a; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: .72rem; font-weight: 700; font-stretch: 80%; letter-spacing: .07em; line-height: 1.2; text-transform: uppercase; }"
+    },
+    {
+      "name": "Auxiliary Strip - status",
+      "kind": "chip",
+      "refersTo": "strip-hold",
+      "description": "Lifecycle status. Reads as absence of ink rather than as a color choice.",
+      "html": "<span class=\"ds-strip-hold\">Not yet released</span>",
+      "css": ".ds-strip-hold { display: inline-block; padding: .6em .9em; background: #9aa3a8; color: #15181a; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: .72rem; font-weight: 700; font-stretch: 80%; letter-spacing: .07em; line-height: 1.2; text-transform: uppercase; }"
+    },
+    {
+      "name": "Action Line",
+      "kind": "nav",
+      "refersTo": "label-card",
+      "description": "Names the action and shows the literal hostname. The arrow travels on hover; the Reserved variant suppresses it.",
+      "html": "<p class=\"ds-go\"><span class=\"ds-go__do\">Open</span><span class=\"ds-go__host\">lbi.plainpoint.net</span></p>",
+      "css": ".ds-go { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .6rem; margin: 0; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: .78rem; font-weight: 700; font-stretch: 86%; letter-spacing: .06em; text-transform: uppercase; color: #15181a; } .ds-go__do::after { content: ' \\2192'; display: inline-block; transition: transform .35s cubic-bezier(.16,1,.3,1); } .ds-go:hover .ds-go__do::after { transform: translateX(4px); } .ds-go__host { font-weight: 600; letter-spacing: .02em; text-transform: none; color: #056a80; overflow-wrap: anywhere; }"
+    },
+    {
+      "name": "Record Block",
+      "kind": "custom",
+      "refersTo": "label-card",
+      "description": "The studio's own verifiable facts, filling the master label's right field. Rule-separated rows, field name left, value right.",
+      "html": "<aside class=\"ds-record\"><p class=\"ds-record__title\">Studio record</p><dl class=\"ds-record__list\"><div><dt>Developer name</dt><dd>Plain Point Studio</dd></div><div><dt>Registered with</dt><dd>Google Play Console</dd></div><div><dt>Domain</dt><dd>plainpoint.net</dd></div></dl></aside>",
+      "css": ".ds-record { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; color: #15181a; font-variant-numeric: tabular-nums; } .ds-record__title { margin: 0 0 1rem; padding-bottom: .7rem; border-bottom: 2px solid #15181a; font-size: .68rem; font-weight: 700; font-stretch: 84%; letter-spacing: .14em; text-transform: uppercase; } .ds-record__list { margin: 0; } .ds-record__list > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; padding: .55rem 0; border-bottom: 1px solid #e2e5df; } .ds-record__list dt { font-size: .68rem; font-weight: 700; font-stretch: 84%; letter-spacing: .11em; text-transform: uppercase; color: #4a524e; padding-top: .15rem; } .ds-record__list dd { margin: 0; font-weight: 600; font-stretch: 88%; font-size: .92rem; text-align: right; }"
+    },
+    {
+      "name": "Focus Ring",
+      "kind": "custom",
+      "refersTo": "label-card",
+      "description": "Global focus-visible treatment. Solid press ink, offset so it clears the die edge.",
+      "html": "<a class=\"ds-focus\" href=\"#\" tabindex=\"0\">Focusable link</a>",
+      "css": ".ds-focus { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; color: #056a80; font-weight: 600; } .ds-focus:focus-visible { outline: 3px solid #15181a; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Dispensary Label Sheet",
+    "overview": "The site is a printed sheet of gummed labels resting on its grey backing liner. Every app is one die-cut label: a lot number, a name struck in condensed ink, directions in plain prose, and a row of saturated auxiliary strips along the foot carrying the facts a person needs before they touch the thing. The liner shows between the labels, scored down the middle with a dashed perforation, because a sheet you can see the backing of is a sheet, not a card grid.\n\nThis world was chosen because it makes the studio's central claim structural instead of rhetorical. A page that says \"privacy-first\" is asking to be believed; a page where every product carries an ingredients label - including the one product that has to admit it uses a server - has already proved it. The strips are the argument. Everything else is stock and ink.\n\nThe register is plain and industrial, never clinical. This is the label a workshop prints, not one a pharmacy dispenses: no crosses, no hazard diamonds, no medical iconography, and the notice color is a working amber rather than a warning red.",
+    "keyCharacteristics": [
+      "Grey liner ground with off-white label stock floating on it, never a full-bleed page color",
+      "Condensed Archivo ink; the width axis carries the label-print character",
+      "Semantic color confined to the auxiliary strips, which do real informational work",
+      "Mixed die formats and mixed corner profiles - no two label sizes repeat in a row",
+      "Flat stock: one shadow, no borders, no gradients standing in for material"
+    ],
+    "rules": [
+      {
+        "name": "The Earned Strip Rule",
+        "body": "A strip-good is a factual claim about an app's data handling. An app never receives one it has not earned, and no strip is ever chosen for visual balance. If an app needs a server, it carries strip-note in plain sight - that disclosure is the design, and softening it breaks the system.",
+        "section": "colors"
+      },
+      {
+        "name": "The Quarantine Rule",
+        "body": "Saturation lives in the strips. Stock, prose, headings, and liner stay neutral; a saturated background anywhere else means a strip has escaped its bed.",
+        "section": "colors"
+      },
+      {
+        "name": "The Width-Axis Rule",
+        "body": "Emphasis is made by compressing, not by adding weight or size alone. Any new display or heading role picks a font-stretch value first; a heading set at normal width has left the world.",
+        "section": "typography"
+      },
+      {
+        "name": "The Latin-Only Rule",
+        "body": "The self-hosted subsets cover Latin. Non-Latin text intentionally falls back to a system face, wrapped in lang and released from text-transform and letter-spacing, which damage combining marks. Never track or uppercase non-Latin strings.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Elevation Rule",
+        "body": "Every surface declares its depth exactly once, with a shadow. A 1px border beneath a wide soft shadow is the ghost-card failure and is banned outright.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Fake Physics Rule",
+        "body": "Paper behavior is expressed with real geometry - a die profile, a mask-cut notch - never with a gradient shaded to imitate a curl or fold.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Mixed Die Rule",
+        "body": "Adjacent labels never share a corner profile. Adding a new label means choosing a die that differs from both of its neighbours.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do give every product a full strip row, and make each strip a fact you could defend.",
+      "Do disclose a server, an account, or a sign-in requirement with strip-note in the same row as the good news. The honesty is the product.",
+      "Do pick a die profile that differs from both neighbours when adding a label.",
+      "Do reach for the width axis (font-stretch) before reaching for size or weight.",
+      "Do keep the page free of third-party requests and executing scripts; the footer makes that claim in writing and the build has to keep it true.",
+      "Do state a product's real status, including \"Not yet released\", rather than linking to something that 404s."
+    ],
+    "donts": [
+      "Don't award a strip-good an app has not earned, or drop a strip-note to make a row look tidier.",
+      "Don't put a border and a shadow on the same surface.",
+      "Don't imitate paper physics with gradients - cut real geometry or leave it flat.",
+      "Don't let saturation out of the strips onto stock, prose, or the liner.",
+      "Don't uppercase or letter-space non-Latin text.",
+      "Don't reintroduce a uniform three-up row of equal cards; the uneven span pattern is the whole compositional thesis.",
+      "Don't add medical or hazard iconography. The world is a workshop label press, not a pharmacy."
+    ]
+  }
+}
