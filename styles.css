@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Archivo";
-  src: url("fonts/archivo-latin-var.woff2") format("woff2-variations");
-  font-weight: 400 800;
+  src: url("fonts/archivo-latin-var.woff2") format("woff2");
+  font-weight: 100 900;
   font-stretch: 62% 125%;
   font-style: normal;
   font-display: swap;
@@ -11,8 +11,8 @@
 
 @font-face {
   font-family: "Archivo";
-  src: url("fonts/archivo-latin-ext-var.woff2") format("woff2-variations");
-  font-weight: 400 800;
+  src: url("fonts/archivo-latin-ext-var.woff2") format("woff2");
+  font-weight: 100 900;
   font-stretch: 62% 125%;
   font-style: normal;
   font-display: swap;
@@ -85,9 +85,27 @@ body {
 
 a { color: inherit; }
 
+/* :focus first so Safari < 15.4, which discards the :focus-visible rules, still shows a ring */
+:focus {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) { outline: none; }
+
 :focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 3px;
+}
+
+/* the click target is the whole label body, so put the ring there too */
+@supports selector(:has(a)) {
+  .label__body h3 a:focus-visible { outline: none; }
+
+  .catalogue .label:has(h3 a:focus-visible) {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
 }
 
 /* ---------- the sheet ---------- */
@@ -114,6 +132,7 @@ a { color: inherit; }
 }
 
 .label__body {
+  position: relative; /* scopes the stretched link so it never covers the strips */
   padding: clamp(1.25rem, 2.6vw, 2rem);
   flex: 1;
 }
@@ -121,8 +140,10 @@ a { color: inherit; }
 /* mixed die profiles — each format is cut differently */
 .label--master {
   border-radius: 22px;
-  -webkit-mask-image: radial-gradient(circle 15px at 0 96px, transparent 15px, #000 15px);
-  mask-image: radial-gradient(circle 15px at 0 96px, transparent 15px, #000 15px);
+  -webkit-mask-image: radial-gradient(circle 21px at 0 62%, transparent 21px, #000 21px);
+  mask-image: radial-gradient(circle 21px at 0 62%, transparent 21px, #000 21px);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .label--wide { border-radius: 6px 20px 20px 6px; }
@@ -185,6 +206,7 @@ h1 {
   margin: 1.1rem 0 0;
   max-width: 64ch;
   color: var(--ink-soft);
+  text-wrap: pretty;
 }
 
 .master {
@@ -245,7 +267,8 @@ h1 {
 .reg {
   width: 34px;
   height: 34px;
-  margin-top: 1.5rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
   color: var(--liner-deep);
 }
 
@@ -274,10 +297,13 @@ h1 {
   white-space: nowrap;
 }
 
+/* Thai is outside the Archivo subset — name the fallback rather than leave it to chance */
 .th {
+  font-family: "Noto Sans Thai", "Leelawadee UI", "Thonburi", sans-serif;
+  font-weight: 700;
+  font-size: 1.1em;
   text-transform: none;
   letter-spacing: normal;
-  font-size: 1.05em;
 }
 
 .strip--good { background: var(--good); }
@@ -296,9 +322,6 @@ h1 {
 .catalogue > .label { grid-column: span 4; }
 .catalogue > .label--wide { grid-column: span 7; }
 .catalogue > .label--tall { grid-column: span 5; }
-.catalogue > .label--five { grid-column: span 5; }
-.catalogue > .label--three { grid-column: span 3; }
-.catalogue > .label--four { grid-column: span 4; }
 
 .lot {
   display: flex;
@@ -374,26 +397,117 @@ h3 .sub {
   text-transform: uppercase;
 }
 
+/* drawn, not typed: U+2192 is absent from the Archivo subset and would fall back */
 .go__do::after {
-  content: " \2192";
+  content: "";
   display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  margin-left: 0.55em;
+  vertical-align: 0.05em;
+  border-top: 0.11em solid currentColor;
+  border-right: 0.11em solid currentColor;
+  transform: rotate(45deg);
   transition: transform 0.35s var(--ease);
 }
 
 .label:hover .go__do::after,
-.label:focus-within .go__do::after { transform: translateX(4px); }
+.label:focus-within .go__do::after { transform: rotate(45deg) translate(3px, -3px); }
 
 .go__host {
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: none;
   color: var(--url);
+  overflow-wrap: break-word; /* Safari < 15.4 drops `anywhere` entirely */
   overflow-wrap: anywhere;
 }
 
 .go--pending { color: var(--ink-soft); }
-.go--pending .go__do::after { content: ""; }
+.go--pending .go__do::after { display: none; }
 .go--pending .go__host { color: var(--ink-soft); }
+
+/* ---------- policy sheet ---------- */
+
+main#policy {
+  display: grid;
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
+}
+
+.policy h2 {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.5rem, 1.15rem + 1.3vw, 2.25rem);
+  font-weight: 800;
+  font-stretch: 74%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.policy h3 {
+  margin: 1.6rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-stretch: 84%;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.policy h3 + .prose,
+.policy h3 + .plain { margin-top: 0.5rem; }
+
+.policy .prose strong { color: var(--ink); }
+
+.policy a {
+  color: var(--url);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.plain {
+  margin: 1.1rem 0 0;
+  padding-left: 1.1rem;
+  max-width: 64ch;
+  color: var(--ink-soft);
+}
+
+.plain li { margin-bottom: 0.4rem; }
+
+.table-scroll {
+  margin-top: 1.1rem;
+  overflow-x: auto;
+}
+
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.grid th,
+.grid td {
+  padding: 0.6rem 0.9rem 0.6rem 0;
+  text-align: left;
+  border-bottom: 1px solid var(--stock-back);
+}
+
+.grid thead th {
+  font-size: 0.68rem;
+  font-weight: 700;
+  font-stretch: 84%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 2px solid var(--ink);
+}
+
+.grid tbody th {
+  font-weight: 600;
+  font-stretch: 88%;
+}
+
+.grid td { color: var(--ink-soft); }
 
 /* ---------- footer ---------- */
 
@@ -414,7 +528,13 @@ h3 .sub {
   color: var(--ink-soft);
 }
 
-.colophon a { color: var(--url); }
+.colophon a {
+  color: var(--url);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.colophon { justify-content: space-between; }
 
 /* ---------- adaptation ---------- */
 
@@ -424,10 +544,7 @@ h3 .sub {
 
 @media (max-width: 1000px) {
   .catalogue > .label,
-  .catalogue > .label--tall,
-  .catalogue > .label--five,
-  .catalogue > .label--four { grid-column: span 6; }
-  .catalogue > .label--three { grid-column: span 6; }
+  .catalogue > .label--tall { grid-column: span 6; }
   .catalogue > .label--wide { grid-column: span 12; }
 }
 
@@ -435,11 +552,8 @@ h3 .sub {
   body { background-image: none; }
   .catalogue > .label,
   .catalogue > .label--wide,
-  .catalogue > .label--tall,
-  .catalogue > .label--five,
-  .catalogue > .label--three,
-  .catalogue > .label--four { grid-column: span 12; }
-  .strip { flex: 1 1 100%; white-space: normal; }
+  .catalogue > .label--tall { grid-column: span 12; }
+  .strip { flex: 1 1 45%; white-space: normal; }
   .lede { max-width: none; }
   .label--master {
     -webkit-mask-image: none;
@@ -458,6 +572,11 @@ h3 .sub {
   .catalogue > .label:nth-child(5) { animation-delay: 0.4s; --tilt: -0.35deg; }
   .catalogue > .label:nth-child(6) { animation-delay: 0.48s; --tilt: 0.55deg; }
   .label--footer { animation-delay: 0.56s; --tilt: 0.3deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .label,
+  .go__do::after { transition: none; }
 }
 
 @keyframes settle {

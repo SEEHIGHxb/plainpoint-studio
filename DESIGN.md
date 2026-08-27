@@ -15,6 +15,7 @@ colors:
   strip-hold: "#9aa3a8"
   url: "#056a80"
   live-dot: "#6f8c00"
+  mask-opaque: "#000"
 typography:
   display:
     fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
@@ -71,6 +72,12 @@ typography:
     lineHeight: 1.35
     letterSpacing: "normal"
     fontVariation: "'wdth' 88"
+  strip-thai:
+    fontFamily: "'Noto Sans Thai', 'Leelawadee UI', Thonburi, sans-serif"
+    fontSize: "1.1em"
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: "normal"
 rounded:
   cut: "6px"
   die: "14px"
@@ -219,27 +226,42 @@ Any new display or heading role picks a `font-stretch` value first; a heading se
 width has left the world.
 
 **The Latin-Only Rule.** The self-hosted subsets cover Latin. Non-Latin text (Thai, in the
-Life Balance Index strip) intentionally falls back to a system face, wrapped in `lang` and
-released from `text-transform` and `letter-spacing`, which damage combining marks. Never track
-or uppercase non-Latin strings.
+Life Balance Index strip) falls back deliberately, wrapped in `lang` and released from
+`text-transform` and `letter-spacing`, which damage combining marks. Never track or uppercase
+non-Latin strings. The fallback is *named*, not left to the OS: `.th` declares
+`"Noto Sans Thai", "Leelawadee UI", "Thonburi", sans-serif` at weight 700, so the Thai run
+sits at the same optical weight as the condensed Latin beside it instead of reading as a
+failed font load.
+
+**The Drawn-Glyph Rule.** Any glyph outside the subset is drawn in CSS, never typed. The
+action arrow is a rotated two-border box on `.go__do::after`, not `U+2192` — that codepoint is
+absent from both the Archivo subset and Google's stock `latin` unicode-range, so typing it
+silently renders a system-font arrow beside condensed Archivo. Before adding any symbol
+character to copy, confirm it is in the subset or draw it.
 
 ## Layout
 
 A centred sheet, `max-width: 1180px`, padded `{spacing.sheet}`, laid out as a vertical stack
 of labels separated by `{spacing.gutter}`.
 
-The catalogue is a **12-column grid with deliberately uneven spans**: 7 / 5 on the first row,
-then 5 / 3 / 4 on the second. The unevenness is load-bearing — it is what makes the page a
-sheet of mixed label dies rather than a card grid, and it is the composition the whole
-direction refuses to give up.
+The catalogue is a **12-column grid, uneven where unevenness pays**: 7 / 5 on the first row,
+then an even 4 / 4 / 4 on the second. The asymmetric first row is what makes the page a sheet
+of mixed dies rather than a card grid; the second row is even because measure wins over
+composition. A 3-span at this sheet width leaves ~197px — roughly 20 characters — which breaks
+prose into ragged four-word lines, orphans the action row, and (because grid rows stretch to
+the tallest sibling) forces ~180px of dead stock into both of its neighbours. **Difference is
+carried by die profile and strip depth, never by starving a column below usable measure.**
 
 Responsive behavior:
 - **≥900px:** the master label splits into two columns (`1.55fr` prose / `minmax(280px, 1fr)`
   record), putting the studio record in the right field of the first viewport.
 - **≤1000px:** catalogue spans collapse to 6, with the wide label taking the full 12.
-- **≤680px:** everything goes full width; auxiliary strips break to one per row (`flex: 1 1
-  100%`, wrapping enabled); the liner perforation and the master's tab notch are both removed,
-  since neither reads at phone width.
+- **≤680px:** everything goes full width; auxiliary strips drop to `flex: 1 1 45%` so short
+  claims pair two-up rather than each becoming a full-bleed band of saturated colour — at
+  phone width, one-per-row turns the palette into the loudest thing on the page. The liner
+  perforation and the master's tab notch are both removed, since neither reads at that size.
+- **320px** (the literal WCAG 1.4.10 reflow width) is verified, not assumed: no horizontal
+  overflow and no clipped strip or host string.
 
 Spacing rhythm: tight inside a label (0.5–1.4rem between elements), generous between labels.
 More space sits above a heading than below it.
@@ -307,7 +329,11 @@ The only container in the system; there are no cards.
 ### Auxiliary Strip
 - **Style:** flat rectangle, press-ink text on its semantic color, uppercase label type.
 - **Behavior:** `flex: 1 1 auto` with `white-space: nowrap` on desktop, so a row self-balances;
-  at ≤680px it becomes `flex: 1 1 100%` with wrapping so long claims stay legible.
+  at ≤680px it becomes `flex: 1 1 45%` with wrapping, pairing short claims two-up.
+- **Dosage:** no label's strip bed is allowed to be entirely amber. A card whose only strips
+  are notices reads as an alert banner, which inverts the meaning — the honest disclosure is
+  supposed to sit *among* facts, not replace them. Runaway therefore leads with a cyan
+  `Open source` before its two amber notices.
 - **Contrast:** every strip color is chosen to clear 4.5:1 against press ink — measured
   chartreuse ≈13:1, cyan ≈7.3:1, amber ≈9.3:1, grey ≈7.1:1. Text on strips is never white.
 
@@ -317,9 +343,10 @@ The only container in the system; there are no cards.
   pending = held grey dot and soft-ink text.
 
 ### Action Line
-- **Style:** `Open` in uppercase label type with a `→` appended via `::after`, followed by the
-  literal hostname in address blue.
-- **Hover / Focus:** the arrow translates 4px; the app name underlines at 2px with a 5px offset.
+- **Style:** `Open` in uppercase label type followed by a CSS-drawn chevron (`::after`, two
+  borders rotated 45°) and the literal hostname in address blue. See the Drawn-Glyph Rule.
+- **Hover / Focus:** the chevron translates diagonally 3px; the app name underlines at 2px with
+  a 5px offset.
 - **Unavailable variant:** `Reserved` with the arrow suppressed and the host in soft ink — used
   when a product has a domain but nothing published at it.
 
@@ -332,7 +359,16 @@ The only container in the system; there are no cards.
 
 ### Focus
 - **Style:** `outline: 3px solid` press ink at `3px` offset, globally on `:focus-visible`.
+  A `:focus` rule is declared *first*, then neutralised by `:focus:not(:focus-visible)`, so
+  Safari < 15.4 — which discards any rule containing `:focus-visible` — still shows a ring.
   A skip link sits off-canvas and returns on focus.
+- **Stretched target:** the whole `.label__body` is the click target, so the ring belongs on
+  the card, not on the two words of the title. Inside `@supports selector(:has(a))`, the
+  anchor's own outline is suppressed and `.label:has(h3 a:focus-visible)` carries it; browsers
+  without `:has()` keep the anchor ring rather than losing focus indication entirely.
+- **Scope:** the overlay is bounded by `position: relative` on `.label__body`, never on
+  `.label`. On `.label` it would swallow the auxiliary strips, making the page's load-bearing
+  disclosures unselectable and turning "Server component (Supabase)" into a link to the app.
 
 ## Do's and Don'ts
 
