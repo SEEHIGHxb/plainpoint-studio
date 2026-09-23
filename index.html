@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plain Point Studio — small, focused, privacy-first apps</title>
-<meta name="description" content="Plain Point Studio is an indie developer building small, focused, privacy-first apps: Life Balance Index, Midori, Vial, Voluma and Runaway.">
+<meta name="description" content="Plain Point Studio is Passakorn, an indie developer in Thailand building small, focused, privacy-first apps: Life Balance Index, Midori, Vial, Voluma, Runaway and Table of Five.">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#c9d1cc">
 <link rel="canonical" href="https://plainpoint.net/">
@@ -60,7 +60,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <p class="stock">Sheet 01 — Studio</p>
         <h1>Plain&nbsp;Point<br>Studio</h1>
         <p class="lede">Indie developer building small, focused, privacy-first apps.</p>
-        <p class="prose">Five apps, built one at a time. Most of them keep everything you type
+        <p class="prose">Plain Point Studio is Passakorn, one developer in Thailand, building and
+          shipping small software end to end: browser apps, Android builds, and line-of-business
+          systems with real users.</p>
+        <p class="prose">Six projects, built one at a time. Most of them keep everything you type
           on the device you typed it on: no account to make, no server holding your ledger,
           your health notes or your audio. Where an app genuinely needs a server, its label
           says so.</p>
@@ -72,7 +75,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <div><dt>Developer name</dt><dd>Plain Point Studio</dd></div>
           <div><dt>Registered with</dt><dd>Google Play Console</dd></div>
           <div><dt>Domain</dt><dd>plainpoint.net</dd></div>
-          <div><dt>Titles on sheet</dt><dd>5</dd></div>
+          <div><dt>Titles on sheet</dt><dd>6</dd></div>
           <div><dt>Built with</dt><dd>Static HTML &amp; CSS</dd></div>
           <div><dt>Source</dt><dd>github.com/SEEHIGHxb</dd></div>
         </dl>
@@ -91,10 +94,38 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     </ul>
   </header>
 
+  <section class="label label--brief" aria-labelledby="brief">
+    <div class="label__body">
+      <p class="lot"><span>Capability</span></p>
+      <h2 class="brief__h" id="brief">What I take on</h2>
+      <p class="prose">Small, finishable software. A browser app or PWA you can install; a React
+        and TypeScript front end on Supabase or Cloudflare; a Django and PostgreSQL system with
+        roles, audit trails and PDF or Excel reports; an Android build taken through Play Console
+        review; a Python dashboard over data you already have. If a job is bigger than one person
+        should sensibly take, I’ll say so.</p>
+    </div>
+    <ul class="strips" role="list">
+      <li class="strip strip--info">React</li>
+      <li class="strip strip--info">TypeScript</li>
+      <li class="strip strip--info">Python</li>
+      <li class="strip strip--info">Django</li>
+      <li class="strip strip--info">PostgreSQL</li>
+      <li class="strip strip--info">Supabase</li>
+      <li class="strip strip--info">Cloudflare</li>
+      <li class="strip strip--info">Android / Play Console</li>
+      <li class="strip strip--info">PWA</li>
+      <li class="strip strip--info">Streamlit</li>
+    </ul>
+  </section>
+
   <main class="catalogue" id="catalogue" tabindex="-1">
     <h2 class="sr-only">Apps by Plain Point Studio</h2>
 
     <article class="label label--wide">
+      <div class="specimen">
+        <img src="shots/lbi.webp" width="1000" height="625" loading="lazy" decoding="async"
+          alt="Life Balance Index: a region summary card headed The Commons, with a progress ring reading three of eight and a Thailand benchmark figure beneath it.">
+      </div>
       <div class="label__body">
         <p class="lot"><span>Lot 01</span><span class="lot__state is-live">Live</span></p>
         <h3><a href="https://lbi.plainpoint.net/" target="_blank" rel="noopener">Life Balance Index<span class="sr-only"> (openslbi.plainpoint.net in a new tab)</span></a></h3>
@@ -111,27 +142,13 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <li class="strip strip--info">Open source</li>
       </ul>
     </article>
-
     <article class="label label--tall">
-      <div class="label__body">
-        <p class="lot"><span>Lot 02</span><span class="lot__state is-pending">In preparation</span></p>
-        <h3>Midori<span class="sub">Leafy Ledger</span></h3>
-        <p class="prose">A personal finance ledger: multi-currency accounts, recurring bills and
-          paychecks that fast-forward themselves, and monthly savings, cash-flow and budget
-          charts. Everything lives in the browser.</p>
-        <p class="go go--pending"><span class="go__do">Reserved</span><span class="go__host">midori.plainpoint.net</span></p>
+      <div class="specimen">
+        <img src="shots/vial.webp" width="1000" height="625" loading="lazy" decoding="async"
+          alt="Vial: a patient profile dialog showing schedule day, first and last injection dates, dose course, frequency and an injection log.">
       </div>
-      <ul class="strips" role="list">
-        <li class="strip strip--good">Data stays on this device</li>
-        <li class="strip strip--good">No account</li>
-        <li class="strip strip--info">Installable (PWA)</li>
-        <li class="strip strip--hold">Not yet released</li>
-      </ul>
-    </article>
-
-    <article class="label label--five">
       <div class="label__body">
-        <p class="lot"><span>Lot 03</span><span class="lot__state is-live">Live</span></p>
+        <p class="lot"><span>Lot 02</span><span class="lot__state is-live">Live</span></p>
         <h3><a href="https://seehighxb.github.io/Vial-MedicineTracker/" target="_blank" rel="noopener">Vial<span class="sr-only"> (opensseehighxb.github.io/Vial-MedicineTracker in a new tab)</span></a><span class="sub">Medicine Tracker</span></h3>
         <p class="prose">A weekly injection schedule built for a single nurse: a treatment
           calendar, each patient's dose, clinic days and injection site, and a morning
@@ -145,10 +162,13 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <li class="strip strip--info">Open source</li>
       </ul>
     </article>
-
-    <article class="label label--three">
+    <article class="label label--halfA">
+      <div class="specimen">
+        <img src="shots/voluma.webp" width="1000" height="625" loading="lazy" decoding="async"
+          alt="Voluma: a dark waveform editor with a decoded six-second file, playback and fade controls, and a split-track panel.">
+      </div>
       <div class="label__body">
-        <p class="lot"><span>Lot 04</span><span class="lot__state is-live">Live</span></p>
+        <p class="lot"><span>Lot 03</span><span class="lot__state is-live">Live</span></p>
         <h3><a href="https://seehighxb.github.io/Voluma-SoundEditor/" target="_blank" rel="noopener">Voluma<span class="sr-only"> (opensseehighxb.github.io/Voluma-SoundEditor in a new tab)</span></a><span class="sub">Sound Editor</span></h3>
         <p class="prose">A waveform editor and splitter that runs inside the browser tab. Trim,
           split, inspect and export local audio through the Web Audio API.</p>
@@ -161,10 +181,13 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <li class="strip strip--info">Open source</li>
       </ul>
     </article>
-
-    <article class="label label--four">
+    <article class="label label--halfB">
+      <div class="specimen">
+        <img src="shots/runaway.webp" width="1000" height="625" loading="lazy" decoding="async"
+          alt="Runaway: the sign-in card, offering Google sign-in through Supabase.">
+      </div>
       <div class="label__body">
-        <p class="lot"><span>Lot 05</span><span class="lot__state is-live">Live</span></p>
+        <p class="lot"><span>Lot 04</span><span class="lot__state is-live">Live</span></p>
         <h3><a href="https://seehighxb.github.io/Runaway/" target="_blank" rel="noopener">Runaway<span class="sr-only"> (opensseehighxb.github.io/Runaway in a new tab)</span></a></h3>
         <p class="prose">A shared run log for a small circle of friends. Post distance, time and
           notes; everyone sees a live leaderboard and a zero-sum baht loss pool. The one app
@@ -175,6 +198,40 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <li class="strip strip--info">Open source</li>
         <li class="strip strip--note">Server component (Supabase)</li>
         <li class="strip strip--note">Google sign-in</li>
+      </ul>
+    </article>
+    <article class="label label--short">
+      <div class="label__body">
+        <p class="lot"><span>Lot 05</span><span class="lot__state is-pending">In preparation</span></p>
+        <h3>Midori<span class="sub">Leafy Ledger</span></h3>
+        <p class="prose">A personal finance ledger: multi-currency accounts, recurring bills and
+          paychecks that fast-forward themselves, and monthly savings, cash-flow and budget
+          charts. Everything lives in the browser.</p>
+        <p class="go go--pending"><span class="go__do">Reserved</span><span class="go__host">midori.plainpoint.net</span></p>
+      </div>
+      <ul class="strips" role="list">
+        <li class="strip strip--good">Data stays on this device</li>
+        <li class="strip strip--good">No account</li>
+        <li class="strip strip--info">Installable (PWA)</li>
+        <li class="strip strip--hold">Not yet released</li>
+      </ul>
+    </article>
+    <article class="label label--long">
+      <div class="label__body">
+        <p class="lot"><span>Lot 06</span><span class="lot__state is-pending">Private build</span></p>
+        <h3>Table of Five<span class="sub">Virtual Tabletop</span></h3>
+        <p class="prose">A browser virtual tabletop for one D&amp;D party. Rolls are made by the
+          server, a Supabase Edge Function running the same TypeScript engine the browser uses, and
+          arrive over Realtime; the browser has no write access to the roll log at all. The 3D dice
+          are scenery: every face is pinned to the value the server already chose. A browser without
+          WebGL, or a reader who asked for reduced motion, gets the 2D log instead.</p>
+      </div>
+      <ul class="strips" role="list">
+        <li class="strip strip--info">React 19 + TypeScript</li>
+        <li class="strip strip--info">Supabase Realtime</li>
+        <li class="strip strip--good">Server-authoritative rolls</li>
+        <li class="strip strip--info">Unit tested (Vitest)</li>
+        <li class="strip strip--hold">Private repository</li>
       </ul>
     </article>
   </main>
@@ -188,7 +245,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <span>Plain Point Studio</span>
         <span><a href="/privacy.html">Privacy</a></span>
         <span><a href="https://github.com/SEEHIGHxb" target="_blank" rel="noopener">github.com/SEEHIGHxb</a></span>
-        <span>Sheet rev. 2026.08</span>
+        <span>Sheet rev. 2026.09</span>
       </p>
     </div>
   </footer>

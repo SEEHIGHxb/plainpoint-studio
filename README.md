@@ -15,7 +15,11 @@ standard.
 | `index.html` | The whole site |
 | `styles.css` | The whole design system |
 | `fonts/` | Archivo variable subsets (latin, latin-ext), self-hosted |
+| `privacy.html` | Per-app privacy policy |
+| `shots/` | Specimen photographs of the live apps (WebP, self-hosted) |
+| `og.png` | Social card, 1200×630 |
 | `404.html` | Not-found page, same design |
+| `.htmlvalidate.json` | Validator config; `.htmlvalidate.md` says why two rules are off |
 | `CNAME` | Binds the GitHub Pages deploy to `plainpoint.net` |
 | `PRODUCT.md` | Durable product record (audiences, constraints, brand commitments) |
 | `DESIGN.md` | The visual system, recorded from the built page |
@@ -45,6 +49,16 @@ not decoration — they carry the app's actual data handling, and their colour i
 | `strip--note` | Something the visitor should know before using it (needs a server, needs sign-in) |
 | `strip--info` | Neutral fact (platform, languages, licence) |
 | `strip--hold` | Status (not yet released) |
+
+### Specimens
+
+A label only gets a photograph in `shots/` if a reader can open the app themselves. Midori is
+unreleased and Table of Five is private, so both stay text-only. Every specimen is a real
+capture of the running app at 1280×800, driven to a populated state with invented demo data
+and never with anyone's real records, then written out at 1000×625 WebP. Do not replace one
+with a mockup or a design comp; the sheet is an honest record or it is worthless.
+
+### Strips
 
 Never give an app a `strip--good` it has not earned. Runaway carries `strip--note` because it
 genuinely stores runs on a server; that honesty is the point of the design.

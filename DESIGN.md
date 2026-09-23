@@ -297,7 +297,35 @@ adjacent labels share one.
   below 680px.
 - Wide label: `6px 20px 20px 6px` — square left, round right.
 - Tall label: `20px 6px 6px 20px` — the mirror of its neighbour.
-- Five-span: `6px`. Three-span: `20px`. Four-span: `6px 6px 20px 20px`. Footer: `6px`.
+- Half-A: `20px`. Half-B: `6px`. Short: `6px 6px 20px 20px`. Footer: `6px`.
+- Long (the private build): `6px 20px 6px 20px`, cut on the diagonal. Nothing else on the
+  sheet uses a diagonal, and nothing else is a build no one can open.
+- Capability label: `20px 20px 6px 6px`, the inverse of the short label, so the two never
+  read as the same die.
+
+### The specimen window
+
+Four labels carry a photograph of the running app, full-bleed across the head of the label
+above the body, separated from the stock by a single `{colors.liner-line}` rule on
+`{colors.stock-back}`. It is the product shot a real label carries, not decoration.
+
+Only a label whose app a reader can open gets one. Midori is not released and Table of Five
+is private, so both stay text-only — a specimen is a promise that the thing exists and can be
+seen, and neither can be. That is also why the catalogue is ordered live work first,
+unreleased second, private last, and why each row pairs labels of the same kind: a row of one
+photographed and one text-only label leaves a void under the shorter one.
+
+Specimens are 1000×625 WebP, self-hosted, `loading="lazy"`, with `width`/`height` set so the
+row reserves its space before the image arrives. Every one is a real capture of the live app,
+driven to a populated state with invented demo data; none is a mockup.
+
+### Stack strips
+
+The capability label's foot carries ten `strip-info` chips naming the stack. Cyan is already
+the platform colour on this sheet, and a stack entry is a platform fact, so the chips borrow
+the meaning rather than inventing a sixth strip colour. They are the one strip row that
+states capability instead of disclosure, which is why they sit on the capability label and
+nowhere else.
 
 Auxiliary strips are hard rectangles with no radius, seated in a backing-edge bed with a
 `{spacing.strip-gap}` gutter, so they read as separate stickers applied to the label rather
@@ -397,7 +425,8 @@ The only container in the system; there are no cards.
 
 <!--
 Known open items, recorded rather than canonized (finish review, minor severity):
-- Voluma's span-3 measure runs short and its host URL breaks mid-token at desktop.
+- Resolved 23 Sep 2026: Voluma moved from a span-3 to a span-6, which gives the host URL
+  room to sit on one line.
 - The master's tab notch reads more like a bump than a cut at rendered scale.
 - Blank stock remains below the record column at desktop.
 These are accepted trade-offs of the mixed-die composition, not rules to preserve.

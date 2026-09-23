@@ -148,9 +148,11 @@ a { color: inherit; }
 
 .label--wide { border-radius: 6px 20px 20px 6px; }
 .label--tall { border-radius: 20px 6px 6px 20px; }
-.label--five { border-radius: 6px; }
-.label--three { border-radius: 20px; }
-.label--four { border-radius: 6px 6px 20px 20px; }
+.label--halfA { border-radius: 20px; }
+.label--halfB { border-radius: 6px; }
+.label--short { border-radius: 6px 6px 20px 20px; }
+.label--long { border-radius: 6px 20px 6px 20px; }
+.label--brief { border-radius: 20px 20px 6px 6px; }
 .label--footer { border-radius: 6px; }
 
 .catalogue .label:hover,
@@ -311,6 +313,19 @@ h1 {
 .strip--info { background: var(--info); }
 .strip--hold { background: var(--hold); }
 
+/* ---------- specimen window: the app itself, printed on the label ---------- */
+
+.specimen {
+  background: var(--stock-back);
+  border-bottom: 1px solid var(--liner-line);
+}
+
+.specimen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ---------- catalogue ---------- */
 
 .catalogue {
@@ -319,9 +334,12 @@ h1 {
   gap: clamp(0.75rem, 1.6vw, 1.25rem);
 }
 
-.catalogue > .label { grid-column: span 4; }
-.catalogue > .label--wide { grid-column: span 7; }
+.catalogue > .label--wide { grid-column: span 7; }   /* row 1: both carry a specimen */
 .catalogue > .label--tall { grid-column: span 5; }
+.catalogue > .label--halfA { grid-column: span 6; }  /* row 2: both carry a specimen */
+.catalogue > .label--halfB { grid-column: span 6; }
+.catalogue > .label--short { grid-column: span 5; }  /* row 3: both are text only */
+.catalogue > .label--long { grid-column: span 7; }
 
 .lot {
   display: flex;
@@ -355,7 +373,8 @@ h1 {
 .is-pending::before { background: var(--hold); }
 .is-pending { color: var(--ink-soft); }
 
-h3 {
+h3,
+.brief__h {
   margin: 0;
   font-size: clamp(1.5rem, 1.15rem + 1.3vw, 2.25rem);
   font-weight: 800;
@@ -543,16 +562,14 @@ main#policy {
 }
 
 @media (max-width: 1000px) {
-  .catalogue > .label,
-  .catalogue > .label--tall { grid-column: span 6; }
-  .catalogue > .label--wide { grid-column: span 12; }
+  .catalogue > .label { grid-column: span 6; }
+  .catalogue > .label--wide,
+  .catalogue > .label--long { grid-column: span 12; }
 }
 
 @media (max-width: 680px) {
   body { background-image: none; }
-  .catalogue > .label,
-  .catalogue > .label--wide,
-  .catalogue > .label--tall { grid-column: span 12; }
+  .catalogue > .label { grid-column: span 12; }
   .strip { flex: 1 1 45%; white-space: normal; }
   .lede { max-width: none; }
   .label--master {
@@ -571,7 +588,9 @@ main#policy {
   .catalogue > .label:nth-child(4) { animation-delay: 0.32s; --tilt: 0.45deg; }
   .catalogue > .label:nth-child(5) { animation-delay: 0.4s; --tilt: -0.35deg; }
   .catalogue > .label:nth-child(6) { animation-delay: 0.48s; --tilt: 0.55deg; }
-  .label--footer { animation-delay: 0.56s; --tilt: 0.3deg; }
+  .catalogue > .label:nth-child(7) { animation-delay: 0.56s; --tilt: -0.5deg; }
+  .label--brief { animation-delay: 0.12s; --tilt: 0.35deg; }
+  .label--footer { animation-delay: 0.64s; --tilt: 0.3deg; }
 }
 
 @media (prefers-reduced-motion: reduce) {
