@@ -321,7 +321,8 @@ driven to a populated state with invented demo data; none is a mockup.
 
 ### Stack strips
 
-The capability label's foot carries ten `strip-info` chips naming the stack. Cyan is already
+The capability label's foot carries nine `strip-info` chips naming the stack. A chip earns
+its place only if something a reader can reach from this sheet demonstrates it. Cyan is already
 the platform colour on this sheet, and a stack entry is a platform fact, so the chips borrow
 the meaning rather than inventing a sixth strip colour. They are the one strip row that
 states capability instead of disclosure, which is why they sit on the capability label and
