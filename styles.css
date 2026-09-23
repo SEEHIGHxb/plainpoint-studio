@@ -146,12 +146,12 @@ a { color: inherit; }
   mask-repeat: no-repeat;
 }
 
-.label--wide { border-radius: 6px 20px 20px 6px; }
-.label--tall { border-radius: 20px 6px 6px 20px; }
-.label--halfA { border-radius: 20px; }
-.label--halfB { border-radius: 6px; }
-.label--short { border-radius: 6px 6px 20px 20px; }
-.label--long { border-radius: 6px 20px 6px 20px; }
+.label--full { border-radius: 20px 6px 20px 6px; }
+.label--third1 { border-radius: 20px 6px 6px 20px; }
+.label--third2 { border-radius: 6px; }
+.label--third3 { border-radius: 6px 6px 20px 20px; }
+.label--five { border-radius: 20px; }
+.label--seven { border-radius: 6px 20px 6px 20px; }
 .label--brief { border-radius: 20px 20px 6px 6px; }
 .label--footer { border-radius: 6px; }
 
@@ -334,12 +334,12 @@ h1 {
   gap: clamp(0.75rem, 1.6vw, 1.25rem);
 }
 
-.catalogue > .label--wide { grid-column: span 7; }   /* row 1: both carry a specimen */
-.catalogue > .label--tall { grid-column: span 5; }
-.catalogue > .label--halfA { grid-column: span 6; }  /* row 2: both carry a specimen */
-.catalogue > .label--halfB { grid-column: span 6; }
-.catalogue > .label--short { grid-column: span 5; }  /* row 3: both are text only */
-.catalogue > .label--long { grid-column: span 7; }
+.catalogue > .label--full { grid-column: span 12; }   /* row 1: text only, the full measure */
+.catalogue > .label--third1 { grid-column: span 4; }  /* row 2: all three carry a specimen */
+.catalogue > .label--third2 { grid-column: span 4; }
+.catalogue > .label--third3 { grid-column: span 4; }
+.catalogue > .label--five { grid-column: span 5; }    /* row 3: both are text only */
+.catalogue > .label--seven { grid-column: span 7; }
 
 .lot {
   display: flex;
@@ -563,8 +563,8 @@ main#policy {
 
 @media (max-width: 1000px) {
   .catalogue > .label { grid-column: span 6; }
-  .catalogue > .label--wide,
-  .catalogue > .label--long { grid-column: span 12; }
+  .catalogue > .label--full,
+  .catalogue > .label--seven { grid-column: span 12; }
 }
 
 @media (max-width: 680px) {

@@ -297,23 +297,28 @@ adjacent labels share one.
   below 680px.
 - Wide label: `6px 20px 20px 6px` — square left, round right.
 - Tall label: `20px 6px 6px 20px` — the mirror of its neighbour.
-- Half-A: `20px`. Half-B: `6px`. Short: `6px 6px 20px 20px`. Footer: `6px`.
-- Long (the private build): `6px 20px 6px 20px`, cut on the diagonal. Nothing else on the
-  sheet uses a diagonal, and nothing else is a build no one can open.
-- Capability label: `20px 20px 6px 6px`, the inverse of the short label, so the two never
-  read as the same die.
+- Full (span 12): `20px 6px 20px 6px`. Third-1: `20px 6px 6px 20px`. Third-2: `6px`.
+  Third-3: `6px 6px 20px 20px`. Five: `20px`. Footer: `6px`.
+- Seven (the private build): `6px 20px 6px 20px`, the opposite diagonal to the full label.
+- Capability label: `20px 20px 6px 6px`, the inverse of Third-3, so the two never read as
+  the same die.
 
 ### The specimen window
 
-Four labels carry a photograph of the running app, full-bleed across the head of the label
+Three labels carry a photograph of the running app, full-bleed across the head of the label
 above the body, separated from the stock by a single `{colors.liner-line}` rule on
 `{colors.stock-back}`. It is the product shot a real label carries, not decoration.
 
-Only a label whose app a reader can open gets one. Midori is not released and Table of Five
-is private, so both stay text-only — a specimen is a promise that the thing exists and can be
-seen, and neither can be. That is also why the catalogue is ordered live work first,
-unreleased second, private last, and why each row pairs labels of the same kind: a row of one
-photographed and one text-only label leaves a void under the shorter one.
+A label earns a specimen only when a reader can open the app **and** its interface has
+settled. Midori is unreleased and Table of Five is private, so neither can be opened. Life
+Balance Index can be opened but its design is still moving, and a photograph of an interface
+about to change is a promise the sheet cannot keep — so it runs text-only across the full
+measure instead, which is also the composition's way of keeping Lot 01 first.
+
+The catalogue is ordered live work first, unreleased second, private last, and every row
+holds labels of one kind only. A row mixing a photographed label with a text-only one leaves
+a void under the shorter one, which is why the three photographed apps share a row of thirds
+and the two remaining text labels share the row below.
 
 Specimens are 1000×625 WebP, self-hosted, `loading="lazy"`, with `width`/`height` set so the
 row reserves its space before the image arrives. Every one is a real capture of the live app,

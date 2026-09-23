@@ -52,8 +52,10 @@ not decoration — they carry the app's actual data handling, and their colour i
 
 ### Specimens
 
-A label only gets a photograph in `shots/` if a reader can open the app themselves. Midori is
-unreleased and Table of Five is private, so both stay text-only. Every specimen is a real
+A label only gets a photograph in `shots/` if a reader can open the app themselves and its
+interface has settled. Midori is unreleased and Table of Five is private; Life Balance Index
+is live but still being designed, so a shot of it would date the moment it changes. All three
+stay text-only. Every specimen is a real
 capture of the running app at 1280×800, driven to a populated state with invented demo data
 and never with anyone's real records, then written out at 1000×625 WebP. Do not replace one
 with a mockup or a design comp; the sheet is an honest record or it is worthless.
