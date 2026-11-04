@@ -297,28 +297,32 @@ adjacent labels share one.
   below 680px.
 - Privacy sheet, in page order: Wide `20px 6px 20px 6px`, Tall `6px 20px 6px 20px`,
   Five `20px`, Three `20px 6px 6px 20px`, Four `6px 6px 20px 20px` — no two neighbours match.
-- Full (span 12): `20px 6px 20px 6px`. Third-1: `20px 6px 6px 20px`. Third-2: `6px`.
-  Third-3: `6px 6px 20px 20px`. Five: `20px`. Footer: `6px`.
-- Seven (the private build): `6px 20px 6px 20px`, the opposite diagonal to the full label.
-- Capability label: `20px 20px 6px 6px`, the inverse of Third-3, so the two never read as
-  the same die.
+- Lead (span 7): `20px 6px 20px 6px`. Side (span 5): `6px 20px 20px 6px`.
+  Half-1 (span 6): `20px 6px 6px 20px`. Half-2 (span 6): `6px 6px 20px 20px`.
+  Five: `20px`. Footer: `6px`.
+- Seven (the private build): `6px 20px 6px 20px`, the opposite diagonal to the lead label.
+- Capability label: `20px 20px 6px 6px`, so it never reads as the same die as the lead
+  label beneath it.
 
 ### The specimen window
 
-Three labels carry a photograph of the running app, full-bleed across the head of the label
+Two labels carry a photograph of the running app, full-bleed across the head of the label
 above the body, separated from the stock by a single `{colors.liner-line}` rule on
 `{colors.stock-back}`. It is the product shot a real label carries, not decoration.
 
 A label earns a specimen only when a reader can open the app **and** its interface has
 settled. Midori is unreleased and Table of Five is private, so neither can be opened. Life
 Balance Index can be opened but its design is still moving, and a photograph of an interface
-about to change is a promise the sheet cannot keep — so it runs text-only across the full
-measure instead, which is also the composition's way of keeping Lot 01 first.
+about to change is a promise the sheet cannot keep. Runaway can be opened, but everything
+past its sign-in card belongs to a signed-in circle of friends, and a sign-in screen is not a
+populated state. Both run text-only.
 
 The catalogue is ordered live work first, unreleased second, private last, and every row
 holds labels of one kind only. A row mixing a photographed label with a text-only one leaves
-a void under the shorter one, which is why the three photographed apps share a row of thirds
-and the two remaining text labels share the row below.
+a void under the shorter one. So the two live text labels share the first row at 7/5, the two
+photographed apps share the second at 6/6, and the unreleased and private labels share the
+third at 5/7. Lots are numbered in that reading order. Below 1000px the first row stacks; the
+other two keep their split down to 680px.
 
 Specimens are 1000×625 WebP, self-hosted, `loading="lazy"`, with `width`/`height` set so the
 row reserves its space before the image arrives. Every one is a real capture of the live app,

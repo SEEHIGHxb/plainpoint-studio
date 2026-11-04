@@ -147,10 +147,10 @@ a { color: inherit; }
   mask-repeat: no-repeat;
 }
 
-.label--full { border-radius: 20px 6px 20px 6px; }
-.label--third1 { border-radius: 20px 6px 6px 20px; }
-.label--third2 { border-radius: 6px; }
-.label--third3 { border-radius: 6px 6px 20px 20px; }
+.label--lead { border-radius: 20px 6px 20px 6px; }
+.label--side { border-radius: 6px 20px 20px 6px; }
+.label--half1 { border-radius: 20px 6px 6px 20px; }
+.label--half2 { border-radius: 6px 6px 20px 20px; }
 .label--five { border-radius: 20px; }
 .label--seven { border-radius: 6px 20px 6px 20px; }
 .label--brief { border-radius: 20px 20px 6px 6px; }
@@ -342,11 +342,11 @@ h1 {
   gap: clamp(0.75rem, 1.6vw, 1.25rem);
 }
 
-.catalogue > .label--full { grid-column: span 12; }   /* row 1: text only, the full measure */
-.catalogue > .label--third1 { grid-column: span 4; }  /* row 2: all three carry a specimen */
-.catalogue > .label--third2 { grid-column: span 4; }
-.catalogue > .label--third3 { grid-column: span 4; }
-.catalogue > .label--five { grid-column: span 5; }    /* row 3: both are text only */
+.catalogue > .label--lead { grid-column: span 7; }   /* row 1: live, text only */
+.catalogue > .label--side { grid-column: span 5; }
+.catalogue > .label--half1 { grid-column: span 6; }  /* row 2: both carry a specimen */
+.catalogue > .label--half2 { grid-column: span 6; }
+.catalogue > .label--five { grid-column: span 5; }    /* row 3: unreleased and private, text only */
 .catalogue > .label--seven { grid-column: span 7; }
 
 .lot {
@@ -574,37 +574,13 @@ main#policy {
 }
 
 @media (max-width: 1000px) {
-  .catalogue > .label { grid-column: span 6; }
-  .catalogue > .label--full,
-  .catalogue > .label--third3 { grid-column: span 12; }
-  .catalogue > .label--five { grid-column: span 5; }   /* keep the uneven text-only pair */
-  .catalogue > .label--seven { grid-column: span 7; }
-
-  /* the odd specimen label runs landscape: shot beside the text, strips across the foot */
-  .catalogue > .label--third3 {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  }
-  .label--third3 .specimen {
-    border-bottom: 0;
-    border-right: 1px solid var(--liner-line);
-  }
-  .label--third3 .strips { grid-column: 1 / -1; }
-  .label--third3 .specimen img {
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-  }
+  .catalogue > .label--lead,
+  .catalogue > .label--side { grid-column: span 12; }
 }
 
 @media (max-width: 680px) {
   body { background-image: none; }
   .catalogue > .label { grid-column: span 12; }
-  .catalogue > .label--third3 { display: flex; }
-  .label--third3 .specimen {
-    border-right: 0;
-    border-bottom: 1px solid var(--liner-line);
-  }
   .strip { flex: 1 1 45%; white-space: normal; }
   .lede { max-width: none; }
   .label--master {

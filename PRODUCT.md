@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-static HTML/CSS/JS, no build step (confirmed: matches sibling projects — Life Balance Index, Midori, Runaway, Vial, Voluma all deploy as static GitHub Pages sites with no build tooling; hosting confirmed as GitHub Pages with a Cloudflare-managed apex record for plainpoint.net)
+static HTML/CSS, no JavaScript, no build step (confirmed: matches sibling projects — Life Balance Index, Midori, Runaway, Vial, Voluma all deploy as static GitHub Pages sites with no build tooling; hosting confirmed as GitHub Pages with a Cloudflare-managed apex record for plainpoint.net)
 
 ## Users
 
@@ -35,7 +35,7 @@ Not a company site or a growth-marketing landing page — a small, honest indie-
 
 ## Capabilities and Constraints
 
-- Single page: hero (studio name + tagline) + portfolio grid of 5 apps + footer. No routing, no build pipeline, no framework.
+- Single page: hero (studio name + tagline) + portfolio of 6 apps (5 public, 1 private build) + footer. No routing, no build pipeline, no framework.
 - Each portfolio card links out to that app's live URL (external link, new tab).
 - Midori and Vial cards must note their privacy-first/local-only nature (explicit user requirement) — no server, data stays on the device.
 - No contact info displayed (explicit user decision, revisit later).
@@ -51,6 +51,7 @@ Not a company site or a growth-marketing landing page — a small, honest indie-
   - **Runaway** — real-time group run tracker for a small friend circle; shared leaderboard via Supabase.
   - **Vial** — private medical companion for tracking weekly medicine injections; local-only, single-user (built for a nurse).
   - **Voluma** — client-side audio waveform editor/splitter, 100% local via Web Audio API, no uploads.
+  - **Table of Five** — browser virtual tabletop for one D&D party; server-authoritative rolls via a Supabase Edge Function. Private build, not offered to the public, so outside the privacy policy's scope.
 
 ## Evidence on Hand
 
