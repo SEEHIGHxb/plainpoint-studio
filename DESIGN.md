@@ -195,8 +195,9 @@ neutral; a saturated background anywhere else means a strip has escaped its bed.
 
 **Character:** One variable family doing three jobs through its **width axis**, the way a label
 press does it with one typeface and several condensed cuts. Weight alone would read as generic
-UI; the compression is what makes it print. Archivo is self-hosted from `fonts/` as two woff2
-subsets (latin, latin-ext) with both axes live — `wght` 400–800 and `wdth` 62%–125%.
+UI; the compression is what makes it print. Archivo is self-hosted from `fonts/` as one woff2
+Latin subset with both axes live — `wght` 400–800 and `wdth` 62%–125%. Nothing on the sheet
+needs Latin Extended, so that subset is not shipped.
 
 ### Hierarchy
 - **Display** (800, `clamp(3rem, 11.5vw, 6rem)`, 0.86, width 66%): The studio name on the
@@ -363,11 +364,17 @@ The only container in the system; there are no cards.
   align along the bottom edge regardless of how much prose sits above them.
 - **Whole-label link:** the app-name anchor carries a stretched `::before` covering the label,
   making the entire surface the target while leaving one real link in the accessibility tree.
+  On a label with a specimen the label is an inline-size container and the overlay reaches up
+  by `62.5cqw + 1px` (the 1000×625 shot plus its rule), so the photograph opens the app too.
+  The strips stay outside the target.
 
 ### Auxiliary Strip
 - **Style:** flat rectangle, press-ink text on its semantic color, uppercase label type.
 - **Behavior:** `flex: 1 1 auto` with `white-space: nowrap` on desktop, so a row self-balances;
-  at ≤680px it becomes `flex: 1 1 45%` with wrapping, pairing short claims two-up.
+  at ≤680px it becomes `flex: 1 1 45%` with wrapping, pairing short claims two-up. A strip may
+  not grow past `max-width: 50%` (`min-width: max-content` overrides it for long claims), so
+  one left alone on a wrapped row stays a chip rather than a band; a sole strip
+  (`:only-child`, the 404) does not grow at all.
 - **Dosage:** no label's strip bed is allowed to be entirely amber. A card whose only strips
   are notices reads as an alert banner, which inverts the meaning — the honest disclosure is
   supposed to sit *among* facts, not replace them. Runaway therefore leads with a cyan

@@ -14,7 +14,7 @@ standard.
 |---|---|
 | `index.html` | The whole site |
 | `styles.css` | The whole design system |
-| `fonts/` | Archivo variable subsets (latin, latin-ext), self-hosted |
+| `fonts/` | Archivo variable, Latin subset, self-hosted |
 | `privacy.html` | Per-app privacy policy |
 | `shots/` | Specimen photographs of the live apps (WebP, self-hosted) |
 | `og.png` | Social card, 1200×630, rendered from `styles.css` (master label) |

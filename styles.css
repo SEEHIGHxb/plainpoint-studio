@@ -9,17 +9,6 @@
     U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@font-face {
-  font-family: "Archivo";
-  src: url("fonts/archivo-latin-ext-var.woff2") format("woff2");
-  font-weight: 100 900;
-  font-stretch: 62% 125%;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF,
-    U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
 :root {
   --liner: #c9d1cc;
   --liner-deep: #a9b4ae;
@@ -174,6 +163,11 @@ a { color: inherit; }
   z-index: 1;
 }
 
+/* …including the specimen above the body: the shot is always 62.5% of the label's width
+   (1000×625) plus its 1px rule, so reach up by exactly that */
+.catalogue .label:has(.specimen) { container-type: inline-size; }
+.catalogue .label:has(.specimen) h3 a::before { top: calc(-62.5cqw - 1px); }
+
 /* ---------- master label ---------- */
 
 .label--master .label__body { padding-bottom: clamp(1.5rem, 3vw, 2.25rem); }
@@ -305,7 +299,14 @@ h1 {
   text-transform: uppercase;
   color: var(--ink);
   white-space: nowrap;
+  /* fill the row, but never stretch past half of it: a chip left alone on a wrapped row
+     stays a chip instead of becoming a band. min-width wins over max-width, so a chip whose
+     own text is wider than half the row is never squeezed. */
+  max-width: 50%;
+  min-width: max-content;
 }
+
+.strip:only-child { flex-grow: 0; }
 
 /* Thai is outside the Archivo subset — name the fallback rather than leave it to chance */
 .th {
@@ -581,7 +582,7 @@ main#policy {
 @media (max-width: 680px) {
   body { background-image: none; }
   .catalogue > .label { grid-column: span 12; }
-  .strip { flex: 1 1 45%; white-space: normal; }
+  .strip { flex: 1 1 45%; white-space: normal; min-width: 0; }
   .lede { max-width: none; }
   .label--master {
     -webkit-mask-image: none;
