@@ -277,6 +277,7 @@ h1 {
   height: 34px;
   margin-top: auto;
   padding-top: 1.5rem;
+  align-self: flex-end; /* close the record on the value column, not float mid-field */
   color: var(--liner-deep);
 }
 
@@ -539,8 +540,9 @@ main#policy {
 .label--footer .prose { margin-top: 0; }
 
 .colophon {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: space-between;
   gap: 0.5rem clamp(1.25rem, 3vw, 2.5rem);
   margin: 1.5rem 0 0;
   padding-top: 1.1rem;
@@ -551,7 +553,6 @@ main#policy {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  justify-content: space-between;
 }
 
 .colophon a {
@@ -566,10 +567,17 @@ main#policy {
   .master { grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr); }
 }
 
+@media (max-width: 900px) {
+  .colophon { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .colophon > span { overflow-wrap: anywhere; }
+}
+
 @media (max-width: 1000px) {
   .catalogue > .label { grid-column: span 6; }
   .catalogue > .label--full,
   .catalogue > .label--third3 { grid-column: span 12; }
+  .catalogue > .label--five { grid-column: span 5; }   /* keep the uneven text-only pair */
+  .catalogue > .label--seven { grid-column: span 7; }
 
   /* the odd specimen label runs landscape: shot beside the text, strips across the foot */
   .catalogue > .label--third3 {
@@ -581,6 +589,11 @@ main#policy {
     border-right: 1px solid var(--liner-line);
   }
   .label--third3 .strips { grid-column: 1 / -1; }
+  .label--third3 .specimen img {
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
 }
 
 @media (max-width: 680px) {
@@ -611,6 +624,10 @@ main#policy {
   .catalogue > .label:nth-child(6) { animation-delay: 0.48s; --tilt: 0.55deg; }
   .catalogue > .label:nth-child(7) { animation-delay: 0.56s; --tilt: -0.5deg; }
   .label--brief { animation-delay: 0.12s; --tilt: 0.35deg; }
+  #policy > .label:nth-child(2) { animation-delay: 0.16s; --tilt: 0.5deg; }
+  #policy > .label:nth-child(3) { animation-delay: 0.24s; --tilt: -0.6deg; }
+  #policy > .label:nth-child(4) { animation-delay: 0.32s; --tilt: 0.45deg; }
+  #policy > .label:nth-child(5) { animation-delay: 0.4s; --tilt: -0.35deg; }
   .label--footer { animation-delay: 0.64s; --tilt: 0.3deg; }
 }
 
