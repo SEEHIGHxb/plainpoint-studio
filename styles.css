@@ -154,6 +154,10 @@ a { color: inherit; }
 .label--seven { border-radius: 6px 20px 6px 20px; }
 .label--brief { border-radius: 20px 20px 6px 6px; }
 .label--footer { border-radius: 6px; }
+.label--wide { border-radius: 20px 6px 20px 6px; }
+.label--tall { border-radius: 6px 20px 6px 20px; }
+.label--three { border-radius: 20px 6px 6px 20px; }
+.label--four { border-radius: 6px 6px 20px 20px; }
 
 .catalogue .label:hover,
 .catalogue .label:focus-within {
@@ -267,6 +271,8 @@ h1 {
 }
 
 .reg {
+  box-sizing: content-box; /* the padding is spacing above the mark, not part of it */
+  flex: none;
   width: 34px;
   height: 34px;
   margin-top: auto;
@@ -545,6 +551,7 @@ main#policy {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  justify-content: space-between;
 }
 
 .colophon a {
@@ -552,8 +559,6 @@ main#policy {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-.colophon { justify-content: space-between; }
 
 /* ---------- adaptation ---------- */
 
@@ -564,12 +569,28 @@ main#policy {
 @media (max-width: 1000px) {
   .catalogue > .label { grid-column: span 6; }
   .catalogue > .label--full,
-  .catalogue > .label--seven { grid-column: span 12; }
+  .catalogue > .label--third3 { grid-column: span 12; }
+
+  /* the odd specimen label runs landscape: shot beside the text, strips across the foot */
+  .catalogue > .label--third3 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .label--third3 .specimen {
+    border-bottom: 0;
+    border-right: 1px solid var(--liner-line);
+  }
+  .label--third3 .strips { grid-column: 1 / -1; }
 }
 
 @media (max-width: 680px) {
   body { background-image: none; }
   .catalogue > .label { grid-column: span 12; }
+  .catalogue > .label--third3 { display: flex; }
+  .label--third3 .specimen {
+    border-right: 0;
+    border-bottom: 1px solid var(--liner-line);
+  }
   .strip { flex: 1 1 45%; white-space: normal; }
   .lede { max-width: none; }
   .label--master {
