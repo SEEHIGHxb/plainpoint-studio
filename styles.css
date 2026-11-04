@@ -136,12 +136,14 @@ a { color: inherit; }
   mask-repeat: no-repeat;
 }
 
-.label--lead { border-radius: 20px 6px 20px 6px; }
-.label--side { border-radius: 6px 20px 20px 6px; }
-.label--half1 { border-radius: 20px 6px 6px 20px; }
-.label--half2 { border-radius: 6px 6px 20px 20px; }
+.case--ngernngok { border-radius: 20px 6px 20px 6px; }
+.case--asterism { border-radius: 6px 20px 6px 20px; }
+.label--mini1 { border-radius: 20px 6px 6px 20px; }
+.label--mini2 { border-radius: 6px; }
+.label--mini3 { border-radius: 6px 20px 6px 6px; }
+.label--mini4 { border-radius: 6px 6px 20px 20px; }
+.label--contact { border-radius: 20px 20px 6px 6px; }
 .label--five { border-radius: 20px; }
-.label--seven { border-radius: 6px 20px 6px 20px; }
 .label--brief { border-radius: 20px 20px 6px 6px; }
 .label--footer { border-radius: 6px; }
 .label--wide { border-radius: 20px 6px 20px 6px; }
@@ -163,10 +165,6 @@ a { color: inherit; }
   z-index: 1;
 }
 
-/* …including the specimen above the body: the shot is always 62.5% of the label's width
-   (1000×625) plus its 1px rule, so reach up by exactly that */
-.catalogue .label:has(.specimen) { container-type: inline-size; }
-.catalogue .label:has(.specimen) h3 a::before { top: calc(-62.5cqw - 1px); }
 
 /* ---------- master label ---------- */
 
@@ -199,7 +197,7 @@ h1 {
   font-stretch: 92%;
   line-height: 1.28;
   letter-spacing: -0.015em;
-  max-width: 24ch;
+  max-width: 30ch;
   text-wrap: balance;
 }
 
@@ -322,19 +320,6 @@ h1 {
 .strip--info { background: var(--info); }
 .strip--hold { background: var(--hold); }
 
-/* ---------- specimen window: the app itself, printed on the label ---------- */
-
-.specimen {
-  background: var(--stock-back);
-  border-bottom: 1px solid var(--liner-line);
-}
-
-.specimen img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* ---------- catalogue ---------- */
 
 .catalogue {
@@ -343,12 +328,7 @@ h1 {
   gap: clamp(0.75rem, 1.6vw, 1.25rem);
 }
 
-.catalogue > .label--lead { grid-column: span 7; }   /* row 1: live, text only */
-.catalogue > .label--side { grid-column: span 5; }
-.catalogue > .label--half1 { grid-column: span 6; }  /* row 2: both carry a specimen */
-.catalogue > .label--half2 { grid-column: span 6; }
-.catalogue > .label--five { grid-column: span 5; }    /* row 3: unreleased and private, text only */
-.catalogue > .label--seven { grid-column: span 7; }
+.catalogue > .label { grid-column: span 3; }  /* "more work": four compact labels */
 
 .lot {
   display: flex;
@@ -411,49 +391,6 @@ h3 .sub {
   letter-spacing: 0.14em;
   color: var(--ink-soft);
 }
-
-.go {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.2rem 0.6rem;
-  margin: 1.4rem 0 0;
-  font-size: 0.78rem;
-  font-weight: 700;
-  font-stretch: 86%;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-/* drawn, not typed: U+2192 is absent from the Archivo subset and would fall back */
-.go__do::after {
-  content: "";
-  display: inline-block;
-  width: 0.4em;
-  height: 0.4em;
-  margin-left: 0.55em;
-  vertical-align: 0.05em;
-  border-top: 0.11em solid currentColor;
-  border-right: 0.11em solid currentColor;
-  transform: rotate(45deg);
-  transition: transform 0.35s var(--ease);
-}
-
-.label:hover .go__do::after,
-.label:focus-within .go__do::after { transform: rotate(45deg) translate(3px, -3px); }
-
-.go__host {
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  color: var(--url);
-  overflow-wrap: break-word; /* Safari < 15.4 drops `anywhere` entirely */
-  overflow-wrap: anywhere;
-}
-
-.go--pending { color: var(--ink-soft); }
-.go--pending .go__do::after { display: none; }
-.go--pending .go__host { color: var(--ink-soft); }
 
 /* ---------- policy sheet ---------- */
 
@@ -563,6 +500,238 @@ main#policy {
   text-underline-offset: 3px;
 }
 
+/* ---------- portfolio: top bar, buttons, sections ---------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem clamp(1rem, 3vw, 2rem);
+  padding: 0.25rem 0.25rem 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.brand__mark { width: 38px; height: 38px; flex: none; }
+
+.brand__name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-stretch: 74%;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.topbar__links {
+  display: flex;
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-stretch: 84%;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.topbar__links a { text-decoration: none; }
+.topbar__links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.15rem;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--stock);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-stretch: 84%;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.btn:hover { background: #2c3236; border-color: #2c3236; }
+
+.btn--ghost { background: transparent; color: var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--stock); border-color: var(--ink); }
+
+.btn--sm { min-height: 40px; padding: 0.55rem 0.95rem; font-size: 0.74rem; }
+
+.actions,
+.case__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.6rem 0 0;
+}
+
+main#work {
+  display: grid;
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
+}
+
+.section-head {
+  padding: clamp(1.5rem, 4vw, 2.75rem) 0.25rem 0.25rem;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  font-weight: 800;
+  font-stretch: 66%;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.section-head p {
+  margin: 0.6rem 0 0;
+  max-width: 60ch;
+  color: var(--ink);
+}
+
+/* ---------- case study: intro, the product in a band, what was built, strips ---------- */
+
+.case__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem clamp(1.5rem, 4vw, 3.5rem);
+  align-items: end;
+}
+
+.case__intro .prose:first-child { margin-top: 0; }
+
+.case__lede {
+  margin: 1rem 0 0;
+  max-width: 30ch;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+  font-weight: 600;
+  font-stretch: 92%;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.case__built { padding-top: clamp(1.25rem, 2.6vw, 2rem); }
+
+.case__h {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-stretch: 84%;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.case__built .plain {
+  max-width: none;
+  margin-top: 0.75rem;
+  columns: 2;
+  column-gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.case__built .plain li { break-inside: avoid; }
+
+.case__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--liner-line);
+  border-bottom: 1px solid var(--liner-line);
+}
+
+.case__media img {
+  display: block;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(21, 24, 26, 0.2), 0 18px 34px -18px rgba(21, 24, 26, 0.65);
+}
+
+/* NgernNgok: three phones on the app's own paper colour, the middle one raised */
+.case__media--phones {
+  gap: clamp(0.6rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 4vw, 3.25rem) clamp(0.75rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.5rem);
+  background: #efebe1;
+}
+
+.case__media--phones img { width: min(28%, 250px); }
+.case__media--phones img:nth-child(2) { transform: translateY(-5%); }
+
+/* Asterism: the desktop overview, with the phone page laid over its corner */
+.case__media--web {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 3.25rem) clamp(1rem, 3vw, 2rem);
+  background: #1b1d22;
+}
+
+.case__desk { width: min(74%, 720px); margin-right: 12%; border-radius: 10px; }
+
+.case__phone {
+  position: absolute;
+  right: max(4%, calc(50% - 470px));
+  bottom: clamp(0.9rem, 2.4vw, 1.75rem);
+  width: min(21%, 200px);
+  border: 3px solid #1b1d22;
+}
+
+/* ---------- services, contact ---------- */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem clamp(1.25rem, 3vw, 2.5rem);
+  margin-top: 1.4rem;
+}
+
+.services .prose { margin-top: 0.5rem; }
+
+.service__h {
+  margin: 0;
+  padding-top: 0.8rem;
+  border-top: 2px solid var(--ink);
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-stretch: 80%;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.services__note { margin-top: 1.6rem; }
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 1.25rem 2rem;
+}
+
+.contact__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.label--contact .btn { text-transform: none; letter-spacing: 0.02em; font-size: 0.92rem; }
+
 /* ---------- adaptation ---------- */
 
 @media (min-width: 900px) {
@@ -575,13 +744,24 @@ main#policy {
 }
 
 @media (max-width: 1000px) {
-  .catalogue > .label--lead,
-  .catalogue > .label--side { grid-column: span 12; }
+  .catalogue > .label { grid-column: span 6; }
+  .case__intro { grid-template-columns: minmax(0, 1fr); }
+  .case__built .plain { columns: 1; }
+  .services { grid-template-columns: minmax(0, 1fr); }
+  .contact { grid-template-columns: minmax(0, 1fr); }
+  .contact__list { justify-content: flex-start; }
 }
 
 @media (max-width: 680px) {
   body { background-image: none; }
   .catalogue > .label { grid-column: span 12; }
+  .topbar__links { display: none; }
+  .brand__name { font-size: 0.95rem; }
+  .case__media--phones { gap: 0.5rem; padding: 1.25rem 0.5rem 1rem; }
+  .case__media--phones img { width: 31%; border-radius: 10px; }
+  .case__media--web { padding: 1.25rem 0.75rem 2.75rem; }
+  .case__desk { width: 84%; margin-right: 14%; }
+  .case__phone { width: 30%; right: 3%; bottom: 0.75rem; }
   .strip { flex: 1 1 45%; white-space: normal; min-width: 0; }
   .lede { max-width: none; }
   .label--master {
@@ -611,7 +791,7 @@ main#policy {
 
 @media (prefers-reduced-motion: reduce) {
   .label,
-  .go__do::after { transition: none; }
+  .btn { transition: none; }
 }
 
 @keyframes settle {

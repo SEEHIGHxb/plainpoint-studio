@@ -1,7 +1,9 @@
 # Plain Point Studio
 
-The studio site at [plainpoint.net](https://plainpoint.net/) — one page listing the apps,
-with each app's data handling stated on its own label.
+The studio site and hiring portfolio at [plainpoint.net](https://plainpoint.net/): who
+Plain Point Studio is, two case studies (NgernNgok and Asterism), services, smaller work and
+a contact route, with each app's data handling stated on its own label. It is the link to
+put on LinkedIn, Fiverr and the Google Play developer profile.
 
 Static HTML and CSS. No build step, no framework, **no JavaScript at all**, and no
 third-party requests: the typeface (Archivo, variable) is served from this domain. That is
@@ -12,12 +14,13 @@ standard.
 
 | Path | What it is |
 |---|---|
-| `index.html` | The whole site |
+| `index.html` | The portfolio: hero, two case studies, services, more work, contact |
 | `styles.css` | The whole design system |
 | `fonts/` | Archivo variable, Latin subset, self-hosted |
 | `privacy.html` | Per-app privacy policy |
-| `shots/` | Specimen photographs of the live apps (WebP, self-hosted) |
+| `shots/` | Real captures of NgernNgok and Asterism (WebP, self-hosted) |
 | `og.png` | Social card, 1200×630, rendered from `styles.css` (master label) |
+| `brand/` | Studio mark, LinkedIn/Fiverr avatar and LinkedIn cover |
 | `favicon.svg`, `apple-touch-icon.png` | Tab icon (drawn to read at 16px) and the 180px iOS home-screen icon |
 | `404.html` | Not-found page, same design |
 | `.htmlvalidate.json` | Validator config; `.htmlvalidate.md` says why two rules are off |
@@ -41,7 +44,10 @@ the source set to that branch's root. `CNAME` handles the custom domain; the ape
 
 ## Editing the labels
 
-Each app is one `<article class="label">` in `index.html`. The coloured auxiliary strips are
+Each app is one `<article class="label">` in `index.html`: a `case` for the two flagship
+apps, a compact label under More work for the rest. Before changing a label, read the app's
+own repository: when an app gains a server, an account or an SDK, its strips and
+`privacy.html` must change in the same commit. The coloured auxiliary strips are
 not decoration — they carry the app's actual data handling, and their colour is semantic:
 
 | Class | Meaning |
@@ -51,16 +57,18 @@ not decoration — they carry the app's actual data handling, and their colour i
 | `strip--info` | Neutral fact (platform, languages, licence) |
 | `strip--hold` | Status (not yet released) |
 
-### Specimens
+### Product images
 
-A label only gets a photograph in `shots/` if a reader can open the app themselves and its
-interface has settled into a populated state. Midori is unreleased and Table of Five is
-private; Life Balance Index is live but still being designed, so a shot of it would date the
-moment it changes; Runaway is live but everything past its sign-in card is a signed-in
-friend circle. All four stay text-only. Every specimen is a real
-capture of the running app at 1280×800, driven to a populated state with invented demo data
-and never with anyone's real records, then written out at 1000×625 WebP. Do not replace one
-with a mockup or a design comp; the sheet is an honest record or it is worthless.
+Every image of an app is a real capture of the running app with invented demo data, never
+a mockup. NgernNgok's come from its own `store-listing/en` screens; Asterism's are captured
+from its code with Playwright after a demo onboarding. DESIGN.md › Product imagery has the
+exact method, including the wellbeing banner that must be dismissed before capture.
+
+### Brand assets
+
+`brand/` holds the studio mark (`mark.svg`, `mark-512.png`), an 800px avatar for LinkedIn and
+Fiverr profile pictures, and a 1584×396 LinkedIn cover. The favicon, `apple-touch-icon.png`
+and `og.png` use the same mark.
 
 ### Strips
 

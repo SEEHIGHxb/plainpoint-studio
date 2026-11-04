@@ -128,6 +128,11 @@ and a row of saturated auxiliary strips along the foot carrying the facts a pers
 before they touch the thing. The liner shows between the labels, scored down the middle with
 a dashed perforation, because a sheet you can see the backing of is a sheet, not a card grid.
 
+Since November 2026 the sheet is also a **hiring portfolio**, linked from LinkedIn and
+Fiverr: the label language stays, but the page leads with who builds what, two full case
+studies and a contact route, and the in-joke wording ("Lot 01", "Sheet 01") is gone from
+anything a client reads.
+
 This world was chosen because it makes the studio's central claim structural instead of
 rhetorical. A page that *says* "privacy-first" is asking to be believed; a page where every
 product carries an ingredients label — including the one product that has to admit it uses a
@@ -227,36 +232,44 @@ Any new display or heading role picks a `font-stretch` value first; a heading se
 width has left the world.
 
 **The Latin-Only Rule.** The self-hosted subsets cover Latin. Non-Latin text (Thai, in the
-Life Balance Index strip) falls back deliberately, wrapped in `lang` and released from
+"English + ไทย" strips and NgernNgok's เงินงอก) falls back deliberately, wrapped in `lang` and released from
 `text-transform` and `letter-spacing`, which damage combining marks. Never track or uppercase
 non-Latin strings. The fallback is *named*, not left to the OS: `.th` declares
 `"Noto Sans Thai", "Leelawadee UI", "Thonburi", sans-serif` at weight 700, so the Thai run
 sits at the same optical weight as the condensed Latin beside it instead of reading as a
 failed font load.
 
-**The Drawn-Glyph Rule.** Any glyph outside the subset is drawn in CSS, never typed. The
-action arrow is a rotated two-border box on `.go__do::after`, not `U+2192` — that codepoint is
-absent from both the Archivo subset and Google's stock `latin` unicode-range, so typing it
-silently renders a system-font arrow beside condensed Archivo. Before adding any symbol
+**The Drawn-Glyph Rule.** Any glyph outside the subset is drawn in CSS or SVG, never typed.
+`U+2192` (→), for example, is absent from both the Archivo subset and Google's stock `latin`
+unicode-range, so typing it silently renders a system-font arrow beside condensed Archivo;
+the buttons carry words instead of arrows for that reason. Before adding any symbol
 character to copy, confirm it is in the subset or draw it.
 
 ## Layout
 
 A centred sheet, `max-width: 1180px`, padded `{spacing.sheet}`, laid out as a vertical stack
-of labels separated by `{spacing.gutter}`.
+of labels separated by `{spacing.gutter}`. Since the November 2026 portfolio revision the
+stack reads, top to bottom: a **top bar** (mark, name, Work / Services / Contact, a Hire me
+button), the **master label** (who, what, two calls to action, the record), **Selected work**
+(two full-width case studies), **What I take on** (three services), **More work** (four
+compact labels), **Contact**, and the footer. Section titles sit on the liner itself, set at
+display width, so the page has an outline a client can scan without reading any label.
 
-The catalogue is a **12-column grid, uneven where unevenness pays**: 7 / 5 on the first row,
-then an even 4 / 4 / 4 on the second. The asymmetric first row is what makes the page a sheet
-of mixed dies rather than a card grid; the second row is even because measure wins over
-composition. A 3-span at this sheet width leaves ~197px — roughly 20 characters — which breaks
-prose into ragged four-word lines, orphans the action row, and (because grid rows stretch to
-the tallest sibling) forces ~180px of dead stock into both of its neighbours. **Difference is
-carried by die profile and strip depth, never by starving a column below usable measure.**
+**Case studies** are full-width labels in four bands: an intro (name, status and lede on the
+left; description and links on the right), the product in a full-bleed band, *What I built*
+in two balanced columns, then the strip bed. The product band takes the app's own ground
+colour (NgernNgok's paper, Asterism's night) so each case is recognisably that product.
+
+**More work** is a 12-column grid at span 3: four compact labels, each one title, one line,
+two strips. Equal spans are allowed here, and only here, because the prose is a single short
+line; a span-3 label holding a paragraph is still forbidden (see the Mixed Die Rule and the
+Don'ts).
 
 Responsive behavior:
 - **≥900px:** the master label splits into two columns (`1.55fr` prose / `minmax(280px, 1fr)`
   record), putting the studio record in the right field of the first viewport.
-- **≤1000px:** catalogue spans collapse to 6, with the wide label taking the full 12.
+- **≤1000px:** the More work labels go two-up, case-study intros and the services stack to
+  one column, and What I built drops to a single column.
 - **≤680px:** everything goes full width; auxiliary strips drop to `flex: 1 1 45%` so short
   claims pair two-up rather than each becoming a full-bleed band of saturated colour — at
   phone width, one-per-row turns the palette into the loudest thing on the page. The liner
@@ -298,36 +311,36 @@ adjacent labels share one.
   below 680px.
 - Privacy sheet, in page order: Wide `20px 6px 20px 6px`, Tall `6px 20px 6px 20px`,
   Five `20px`, Three `20px 6px 6px 20px`, Four `6px 6px 20px 20px` — no two neighbours match.
-- Lead (span 7): `20px 6px 20px 6px`. Side (span 5): `6px 20px 20px 6px`.
-  Half-1 (span 6): `20px 6px 6px 20px`. Half-2 (span 6): `6px 6px 20px 20px`.
-  Five: `20px`. Footer: `6px`.
-- Seven (the private build): `6px 20px 6px 20px`, the opposite diagonal to the lead label.
-- Capability label: `20px 20px 6px 6px`, so it never reads as the same die as the lead
-  label beneath it.
+- Home: NgernNgok case `20px 6px 20px 6px`, Asterism case `6px 20px 6px 20px` (the opposite
+  diagonal), services `20px 20px 6px 6px`, More work `20px 6px 6px 20px` / `6px` /
+  `6px 20px 6px 6px` / `6px 6px 20px 20px`, contact `20px 20px 6px 6px`, footer `6px`.
+- Buttons are the one rounded control that is not a die: `6px` all round, 2px ink border.
 
-### The specimen window
+### Product imagery
 
-Two labels carry a photograph of the running app, full-bleed across the head of the label
-above the body, separated from the stock by a single `{colors.liner-line}` rule on
-`{colors.stock-back}`. It is the product shot a real label carries, not decoration.
+Every image of an app is a **real capture of the running app**, driven to a populated state
+with invented demo data and never anyone's real records. None is a mockup or a design comp.
 
-A label earns a specimen only when a reader can open the app **and** its interface has
-settled. Midori is unreleased and Table of Five is private, so neither can be opened. Life
-Balance Index can be opened but its design is still moving, and a photograph of an interface
-about to change is a promise the sheet cannot keep. Runaway can be opened, but everything
-past its sign-in card belongs to a signed-in circle of friends, and a sign-in screen is not a
-populated state. Both run text-only.
+- **NgernNgok:** the plain `store-listing/en` screens from its own repository (1080×1920,
+  made-up demo ledger), resized to 540×960 WebP: overview, chat entry, slip scanning. Shown as
+  three phones on the app's paper colour, the middle one raised.
+- **Asterism:** captured from the live code with Playwright after an onboarding filled with
+  mid-range demo answers (the app's own e2e flow, adapted). The desktop overview at 1280×800
+  and the Highlands page at 360×640 @3x; the phone is laid over the desktop's corner on the
+  app's night colour. The wellbeing-support banner that demo answers can raise is dismissed
+  with its own close button before capture; it must never appear in a portfolio image.
 
-The catalogue is ordered live work first, unreleased second, private last, and every row
-holds labels of one kind only. A row mixing a photographed label with a text-only one leaves
-a void under the shorter one. So the two live text labels share the first row at 7/5, the two
-photographed apps share the second at 6/6, and the unreleased and private labels share the
-third at 5/7. Lots are numbered in that reading order. Below 1000px the first row stacks; the
-other two keep their split down to 680px.
+Images are self-hosted WebP, `loading="lazy"`, with `width`/`height` set so the band reserves
+its space before the image arrives.
 
-Specimens are 1000×625 WebP, self-hosted, `loading="lazy"`, with `width`/`height` set so the
-row reserves its space before the image arrives. Every one is a real capture of the live app,
-driven to a populated state with invented demo data; none is a mockup.
+### Brand mark
+
+A monogram **P** whose counter holds the point: stock-coloured P on an ink tile, the counter
+dot in `{colors.strip-good}`. It is drawn as three SVG shapes (tile, stroked P, circle) and
+reads as a letter down to 16px and inside a circular avatar crop. `brand/` holds the master
+SVG, a 512px tile, an 800px avatar for LinkedIn and Fiverr (the P inset so a circle never
+clips it) and a 1584×396 LinkedIn cover whose left third is left clear for the profile photo.
+The favicon, apple-touch-icon and social card use the same drawing.
 
 ### Stack strips
 
@@ -364,9 +377,8 @@ The only container in the system; there are no cards.
   align along the bottom edge regardless of how much prose sits above them.
 - **Whole-label link:** the app-name anchor carries a stretched `::before` covering the label,
   making the entire surface the target while leaving one real link in the accessibility tree.
-  On a label with a specimen the label is an inline-size container and the overlay reaches up
-  by `62.5cqw + 1px` (the 1000×625 shot plus its rule), so the photograph opens the app too.
-  The strips stay outside the target.
+  Used on the compact More work labels only; case studies carry several actions and use
+  buttons instead. The strips stay outside the target.
 
 ### Auxiliary Strip
 - **Style:** flat rectangle, press-ink text on its semantic color, uppercase label type.
@@ -383,17 +395,16 @@ The only container in the system; there are no cards.
   chartreuse ≈13:1, cyan ≈7.3:1, amber ≈9.3:1, grey ≈7.1:1. Text on strips is never white.
 
 ### Lot Line
-- **Style:** a flex row at the top of every label — lot number left in soft ink, status right.
+- **Style:** a flex row at the top of every label: category left in soft ink ("Android app ·
+  Money"), status right.
 - **Status:** `.lot__state` with a 0.6em dot. Live = live-dot green and full-ink text;
-  pending = held grey dot and soft-ink text.
+  pending = held grey dot and soft-ink text ("Coming to Google Play", "Private build").
 
-### Action Line
-- **Style:** `Open` in uppercase label type followed by a CSS-drawn chevron (`::after`, two
-  borders rotated 45°) and the literal hostname in address blue. See the Drawn-Glyph Rule.
-- **Hover / Focus:** the chevron translates diagonally 3px; the app name underlines at 2px with
-  a 5px offset.
-- **Unavailable variant:** `Reserved` with the arrow suppressed and the host in soft ink — used
-  when a product has a domain but nothing published at it.
+### Buttons
+- **Primary:** ink fill, stock text, uppercase label type at 84% width, 44px minimum height.
+- **Ghost:** transparent with a 2px ink border; fills with ink on hover.
+- Used for every action: Hire me, Start a project, Open, Source, email. A compact label in More
+  work keeps the stretched whole-label link instead, since it has a single destination.
 
 ### Record Block
 - **Style:** a definition list in the master label's right field. A 2px ink rule under the
@@ -425,8 +436,10 @@ The only container in the system; there are no cards.
 - **Do** reach for the width axis (`font-stretch`) before reaching for size or weight.
 - **Do** keep the page free of third-party requests and executing scripts; the footer makes
   that claim in writing and the build has to keep it true.
-- **Do** state a product's real status, including "Not yet released", rather than linking to
-  something that 404s.
+- **Do** state a product's real status, including "Coming to Google Play", rather than linking
+  to something that 404s.
+- **Do** check an app's own repository before describing it; a label goes stale the moment the
+  app gains a server, an account or an SDK.
 
 ### Don't:
 - **Don't** award a `strip-good` an app has not earned, or drop a `strip-note` to make a row
@@ -435,8 +448,8 @@ The only container in the system; there are no cards.
 - **Don't** imitate paper physics with gradients — cut real geometry or leave it flat.
 - **Don't** let saturation out of the strips onto stock, prose, or the liner.
 - **Don't** uppercase or letter-space non-Latin text.
-- **Don't** reintroduce a uniform three-up row of equal cards; the uneven span pattern is the
-  whole compositional thesis.
+- **Don't** put a paragraph in an equal-span row. Equal spans are for the one-line More work
+  labels only; anything with real prose gets a full-width or uneven layout.
 - **Don't** add medical or hazard iconography. The world is a workshop label press, not a
   pharmacy.
 
