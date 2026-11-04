@@ -33,6 +33,7 @@
   --info: #00b3d6;
   --hold: #9aa3a8;
   --url: #056a80;
+  --live: #6f8c00;
   --radius: 14px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -376,7 +377,7 @@ h1 {
   background: currentColor;
 }
 
-.is-live::before { background: #6f8c00; }
+.is-live::before { background: var(--live); }
 .is-pending::before { background: var(--hold); }
 .is-pending { color: var(--ink-soft); }
 
@@ -617,17 +618,17 @@ main#policy {
 @media (prefers-reduced-motion: no-preference) {
   .label { animation: settle 0.7s var(--ease) backwards; }
   .label--master { animation-delay: 0.04s; --tilt: -0.4deg; }
-  .catalogue > .label:nth-child(2) { animation-delay: 0.16s; --tilt: 0.5deg; }
-  .catalogue > .label:nth-child(3) { animation-delay: 0.24s; --tilt: -0.6deg; }
-  .catalogue > .label:nth-child(4) { animation-delay: 0.32s; --tilt: 0.45deg; }
-  .catalogue > .label:nth-child(5) { animation-delay: 0.4s; --tilt: -0.35deg; }
-  .catalogue > .label:nth-child(6) { animation-delay: 0.48s; --tilt: 0.55deg; }
-  .catalogue > .label:nth-child(7) { animation-delay: 0.56s; --tilt: -0.5deg; }
-  .label--brief { animation-delay: 0.12s; --tilt: 0.35deg; }
-  #policy > .label:nth-child(2) { animation-delay: 0.16s; --tilt: 0.5deg; }
-  #policy > .label:nth-child(3) { animation-delay: 0.24s; --tilt: -0.6deg; }
-  #policy > .label:nth-child(4) { animation-delay: 0.32s; --tilt: 0.45deg; }
-  #policy > .label:nth-child(5) { animation-delay: 0.4s; --tilt: -0.35deg; }
+  .catalogue > article:nth-of-type(1) { animation-delay: 0.16s; --tilt: 0.5deg; }
+  .catalogue > article:nth-of-type(2) { animation-delay: 0.24s; --tilt: -0.6deg; }
+  .catalogue > article:nth-of-type(3) { animation-delay: 0.32s; --tilt: 0.45deg; }
+  .catalogue > article:nth-of-type(4) { animation-delay: 0.4s; --tilt: -0.35deg; }
+  .catalogue > article:nth-of-type(5) { animation-delay: 0.48s; --tilt: 0.55deg; }
+  .catalogue > article:nth-of-type(6) { animation-delay: 0.56s; --tilt: -0.5deg; }
+  #policy > article:nth-of-type(1) { animation-delay: 0.16s; --tilt: 0.5deg; }
+  #policy > article:nth-of-type(2) { animation-delay: 0.24s; --tilt: -0.6deg; }
+  #policy > article:nth-of-type(3) { animation-delay: 0.32s; --tilt: 0.45deg; }
+  #policy > article:nth-of-type(4) { animation-delay: 0.4s; --tilt: -0.35deg; }
+  #policy > article:nth-of-type(5) { animation-delay: 0.48s; --tilt: 0.55deg; }
   .label--footer { animation-delay: 0.64s; --tilt: 0.3deg; }
 }
 

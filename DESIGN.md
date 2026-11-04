@@ -292,11 +292,11 @@ a gradient corner "peel"; it was removed for exactly this reason.
 The form language is **die-cutting**: every label format is cut to its own profile, and no two
 adjacent labels share one.
 
-- Master label: `{rounded.die-master}` all round, plus a genuine 15px semicircular **tab notch**
-  cut into its left edge with `mask-image: radial-gradient(circle 15px at 0 96px, …)`. Removed
+- Master label: `{rounded.die-master}` all round, plus a genuine 21px semicircular **tab notch**
+  cut into its left edge with `mask-image: radial-gradient(circle 21px at 0 62%, …)`. Removed
   below 680px.
-- Wide label: `6px 20px 20px 6px` — square left, round right.
-- Tall label: `20px 6px 6px 20px` — the mirror of its neighbour.
+- Privacy sheet, in page order: Wide `20px 6px 20px 6px`, Tall `6px 20px 6px 20px`,
+  Five `20px`, Three `20px 6px 6px 20px`, Four `6px 6px 20px 20px` — no two neighbours match.
 - Full (span 12): `20px 6px 20px 6px`. Third-1: `20px 6px 6px 20px`. Third-2: `6px`.
   Third-3: `6px 6px 20px 20px`. Five: `20px`. Footer: `6px`.
 - Seven (the private build): `6px 20px 6px 20px`, the opposite diagonal to the full label.
